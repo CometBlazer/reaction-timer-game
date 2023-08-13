@@ -1,13 +1,18 @@
 <template>
   <h1>Ninja Reaction Timer</h1>
-  <button @click="start">Play</button>
+  <button @click="start" v-bind:disabled="isPlaying">Play</button>
+  <Block v-if="isPlaying" v-bind:delay="delay"/>
 </template>
 
 <script>
 
+import Block from './components/Block.vue'
+
 export default {
   name: 'App',
   components: {
+    Block,
+
   },
   data() {
     return {
