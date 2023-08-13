@@ -1,15 +1,27 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Ninja Reaction Timer</h1>
+  <button @click="start">Play</button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+  },
+  data() {
+    return {
+      isPlaying: false,
+      delay: null, //set it to a random number
+
+    }
+  },
+  methods: {
+    start() {
+      this.delay = 2000 + Math.random() * 5000; //in milliseconds - random amount between 2000 and 7000 ms
+      this.isPlaying = true;
+      console.log(this.delay)
+    }
   }
 }
 </script>
@@ -20,7 +32,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #444;
   margin-top: 60px;
 }
 </style>
