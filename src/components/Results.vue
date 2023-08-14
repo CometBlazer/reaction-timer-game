@@ -1,6 +1,6 @@
 <template>
-  <p>Reaction time: {{ scoreName }} ms</p>
-  <p class="rank">Rank: {{ rank }}</p>
+  <p v-if=!tooSoon >Reaction time: {{ scoreName }} ms</p>
+  <p class="rank" >{{ rank }}</p>
 </template>
 
 <script>
@@ -8,18 +8,27 @@ export default {
     props: ['scoreName', ], 
     data() {
       return {
-        rank: null
+        rank: null,
+        tooSoon: false,
       }
     },
     mounted() { //lifecycle hook
-      if(this.scoreName < 200){
-        this.rank = 'Lightning fast'
-      }
-      else if(this.scoreName < 300){
-        this.rank = 'Decent'
+      if(this.scoreName == -1){
+        this.rank = 'Too soon! (Try again)'
+        this.tooSoon = true
       }
       else{
-        this.rank = 'Snail pace...'
+        this.tooSoon = false
+
+        if(this.scoreName < 200){
+          this.rank = 'Lightning fast!'
+        }
+        else if(this.scoreName < 400){
+          this.rank = 'You\'re average.'
+        }
+        else{
+          this.rank = 'Bro, get faster...'
+        }
       }
     }
 }
